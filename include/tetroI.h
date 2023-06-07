@@ -2,6 +2,7 @@
 #define TETROI_H
 
 #include "tetromino.h"
+//#include "tetrostate.h"
 
 class TetroI : public Tetromino {
     public:

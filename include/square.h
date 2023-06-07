@@ -37,6 +37,14 @@ class Square {
      * draw the square on the screen
      */
     void draw();
+
+    void moveRight();
+
+    void moveLeft();
+
+    void moveUp();
+
+    void moveDown();
 };
 
 #endif

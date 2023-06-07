@@ -11,13 +11,14 @@ class Tetris {
     public:
     
     timer MyTimer;
-    timer PauseTimer;
 
     Matrix gameboard, field;
 
+    TetroI testBlock;
+
     double timeElapsed, timeStamp;
 
-    bool paused;
+    bool paused, rightPressing, leftPressing, upPressing, downPressing;
     
     /**
      * creates a tetris game to play with

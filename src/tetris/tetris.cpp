@@ -2,23 +2,62 @@
 
 Tetris::Tetris() {
     MyTimer = timer();
-    PauseTimer = timer();
     
     gameboard = Matrix(10,10,20,20);
 
-    paused = false;
+    paused = false, rightPressing = false;
     timeStamp = 0.0;
     timeElapsed = 0.0;
 
     drawBackground();
 
     //test
-    TetroI testBlock = TetroI(60,60);
+    testBlock = TetroI(60,60);
 }
 
 void Tetris::play() {
     while(1) {
         updateTime();
+        //buttons
+        if (Controller1.ButtonA.pressing()) {
+            if (!rightPressing) {
+                testBlock.moveRight();
+                rightPressing = true;
+            }
+        }
+        else {
+            rightPressing = false;
+        }
+
+        if (Controller1.ButtonB.pressing()) {
+            if (!downPressing) {
+                testBlock.moveDown();
+                downPressing = true;
+            }
+        }
+        else {
+            downPressing = false;
+        }
+
+        if (Controller1.ButtonY.pressing()) {
+            if (!leftPressing) {
+                testBlock.moveLeft();
+                leftPressing = true;
+            }
+        }
+        else {
+            leftPressing = false;
+        }
+
+        if (Controller1.ButtonX.pressing()) {
+            if (!upPressing) {
+                testBlock.moveUp();
+                upPressing = true;
+            }
+        }
+        else {
+            upPressing = false;
+        }
     }
 }
 
