@@ -1,7 +1,8 @@
 #ifndef TETRIS_H
 #define TETRIS_H
 
-#include "vex.h"
+#include "matrix.h"
+#include "tetroI.h"
 
 /**
  * includes everything in tetris
@@ -9,8 +10,10 @@
 class Tetris {
     public:
     
-    vex::timer MyTimer;
-    vex::timer PauseTimer;
+    timer MyTimer;
+    timer PauseTimer;
+
+    Matrix gameboard, field;
 
     double timeElapsed, timeStamp;
 
@@ -33,8 +36,9 @@ class Tetris {
     void drawBackground();
 
     /**
-     * update values such as timer and score
-     * to the screen
+     * update the timer to the screen
+     * and determine when to pause and
+     * resume the game
      */
     void updateTime();
 };

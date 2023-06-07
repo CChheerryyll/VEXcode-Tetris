@@ -3,12 +3,17 @@
 Tetris::Tetris() {
     MyTimer = timer();
     PauseTimer = timer();
+    
+    gameboard = Matrix(10,10,20,20);
 
     paused = false;
     timeStamp = 0.0;
     timeElapsed = 0.0;
 
     drawBackground();
+
+    //test
+    TetroI testBlock = TetroI(60,60);
 }
 
 void Tetris::play() {
@@ -18,8 +23,7 @@ void Tetris::play() {
 }
 
 void Tetris::drawBackground() {
-    Brain.Screen.clearScreen(black);
-    Brain.Screen.drawRectangle(20,20,200,200,black);
+    gameboard.draw(true);
 }
 
 void Tetris::updateTime() {
@@ -28,12 +32,16 @@ void Tetris::updateTime() {
         if (!paused) { //first time pausing the game
             paused = true;
             timeStamp += MyTimer.time(sec);
+            Brain.Screen.printAt(240,55,"Game Paused");
         }
     }
     else if (Controller1.ButtonR1.pressing()) {
         if (paused) { //need to resume the game
             paused = false;
             MyTimer.clear();
+            Brain.Screen.setPenColor(black);
+            Brain.Screen.drawRectangle(240,35,120,20,black);
+            Brain.Screen.setPenColor(white);
         }
     }
 
