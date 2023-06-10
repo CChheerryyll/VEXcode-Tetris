@@ -1,7 +1,9 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#include "vex.h"
+#include "colors.h"
+
+using namespace vex;
 
 /**
  * the basic unit of the game

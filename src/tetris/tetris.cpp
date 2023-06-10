@@ -1,4 +1,7 @@
+#include "vex.h"
 #include "tetris.h"
+
+using namespace vex;
 
 Tetris::Tetris() {
     MyTimer = timer();
@@ -9,10 +12,11 @@ Tetris::Tetris() {
     timeStamp = 0.0;
     timeElapsed = 0.0;
 
+    initializeStates();
     drawBackground();
 
     //test
-    testBlock = TetroI(60,60);
+    testBlock = Tetromino(60,60,'I');
 }
 
 void Tetris::play() {
@@ -51,7 +55,8 @@ void Tetris::play() {
 
         if (Controller1.ButtonX.pressing()) {
             if (!upPressing) {
-                testBlock.moveUp();
+                //testBlock.moveUp();
+                testBlock.rotate();
                 upPressing = true;
             }
         }
@@ -63,6 +68,7 @@ void Tetris::play() {
 
 void Tetris::drawBackground() {
     gameboard.draw(true);
+    //printf("drew background\n");
 }
 
 void Tetris::updateTime() {

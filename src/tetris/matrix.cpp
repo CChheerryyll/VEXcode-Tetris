@@ -1,4 +1,7 @@
+#include "vex.h"
 #include "matrix.h"
+
+using namespace vex;
 
 Matrix::Matrix() {
 

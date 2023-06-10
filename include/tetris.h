@@ -2,7 +2,10 @@
 #define TETRIS_H
 
 #include "matrix.h"
-#include "tetroI.h"
+#include "tetromino.h"
+//#include "colors.h"
+
+using namespace vex;
 
 /**
  * includes everything in tetris
@@ -14,7 +17,7 @@ class Tetris {
 
     Matrix gameboard, field;
 
-    TetroI testBlock;
+    Tetromino testBlock;
 
     double timeElapsed, timeStamp;
 

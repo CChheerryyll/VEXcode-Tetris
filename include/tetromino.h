@@ -2,41 +2,59 @@
 #define TETROMINO_H
 
 #include "square.h"
+#include "tetrostates.h"
+
+using namespace vex;
 
 class Tetromino {
     public:
 
-    int x, y;
-    char id;
+        int x, y;
+        char id;
 
-    Square shape[4][4];
-    
-    /**
-     * draw the tetromino
-     */
-    virtual void draw();
+        Square shapes[4][4][4];
+        int currentShape;
 
-    /**
-     * move the tetromino right and draw
-     */
-    virtual void moveRight();
+        Tetromino();
 
-    /**
-     * move the tetromino left and draw
-     */
-    virtual void moveLeft();
+        Tetromino(int x, int y, char id);
 
-    /**
-     * move the tetromino up and draw
-     */
-    virtual void moveUp();
-    
-    /**
-     * move the tetromino down and draw
-     */
-    virtual void moveDown();
+        /** 
+        * change shape_ to the tetrostate
+        * stored in sq 
+        */
+        //void transfer(Square shape_[4][4], Square sq[4][4]);
+        
+        /**
+        * draw the tetromino
+        */
+        void draw();
 
-    //virtual void rotate();
+        /**
+        * move the tetromino right and draw
+        */
+        void moveRight();
+
+        /**
+        * move the tetromino left and draw
+        */
+        void moveLeft();
+
+        /**
+        * move the tetromino up and draw
+        */
+        void moveUp();
+        
+        /**
+        * move the tetromino down and draw
+        */
+        void moveDown();
+
+        /**
+         * rotate the tetromino and draw
+         */
+        void rotate();
+
 };
 
 #endif

@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       C:\Users\lijia                                            */
+/*    Author:       Nanayu                                                    */
 /*    Created:      Mon Jun 05 2023                                           */
 /*    Description:  V5 project                                                */
 /*                                                                            */
@@ -13,6 +13,7 @@
 // Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
+#include "vex.h"
 #include "tetris.h"
 
 using namespace vex;
@@ -20,7 +21,7 @@ using namespace vex;
 int main() {
     // Initializing Robot Configuration. DO NOT REMOVE!
     vexcodeInit();
-    
+
     Tetris Game = Tetris();
     Game.play();
 }
