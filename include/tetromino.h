@@ -11,13 +11,14 @@ class Tetromino {
 
         int x, y;
         char id;
+        bool show;
 
         Square shapes[4][4][4];
         int currentShape;
 
         Tetromino();
 
-        Tetromino(int x, int y, char id);
+        Tetromino(int x_, int y_, char id_, bool show_);
 
         /** 
         * change shape_ to the tetrostate

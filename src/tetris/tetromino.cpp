@@ -7,7 +7,8 @@ Tetromino::Tetromino() {
 
 }
 
-Tetromino::Tetromino(int x, int y, char id) {
+Tetromino::Tetromino(int x_, int y_, char id_, bool show_) {
+    x = x_; y = y_; id = id_; show = show_;
     currentShape = 0;
     if (id == 'I') {
         for (int i=0; i<4; i++) {
@@ -15,7 +16,9 @@ Tetromino::Tetromino(int x, int y, char id) {
             transfer(shapes[i],Ishapes[i]);
         }
     }
-    draw();
+    if(show) {
+        draw();
+    }
 }
 
 /*void Tetromino::transfer(Square shape_[4][4], Square sq[4][4]) {
@@ -43,7 +46,7 @@ void Tetromino::moveRight() {
     for (int k=0; k<4; k++) {
       for (int i=3; i>=0; i--) {
           for (int j=3; j>=0; j--) {
-              if (k == currentShape) {
+              if (k == currentShape && show) {
                   shapes[k][i][j].moveRight();
               }
               else {
@@ -58,7 +61,7 @@ void Tetromino::moveLeft() {
     for (int k=0; k<4; k++) {
       for (int i=0; i<4; i++) {
           for (int j=0; j<4; j++) {
-              if (k == currentShape) {
+              if (k == currentShape && show) {
                   shapes[k][i][j].moveLeft();
               }
               else {
@@ -73,7 +76,7 @@ void Tetromino::moveUp() {
     for (int k=0; k<4; k++) {
       for (int i=0; i<4; i++) {
           for (int j=0; j<4; j++) {
-              if (k == currentShape) {
+              if (k == currentShape && show) {
                   shapes[k][i][j].moveUp();
               }
               else {
@@ -88,7 +91,7 @@ void Tetromino::moveDown() {
     for (int k=0; k<4; k++) {
       for (int i=3; i>=0; i--) {
           for (int j=0; j<4; j++) {
-              if (k == currentShape) {
+              if (k == currentShape && show) {
                   shapes[k][i][j].moveDown();
               }
               else {
@@ -99,22 +102,25 @@ void Tetromino::moveDown() {
     }
 }
 
-
 void Tetromino::rotate() {
-    for (int i=0; i<4; i++) {
-        for (int j=0; j<4; j++) {
-            if (shapes[currentShape][i][j].id != 'v') {
-                Brain.Screen.setPenColor(myGray);
-                Brain.Screen.drawRectangle(shapes[currentShape][i][j].x,shapes[currentShape][i][j].y,20,20,black);
-                Brain.Screen.setPenColor(white);
-            }
-        }
+    if (show) {
+      for (int i=0; i<4; i++) {
+          for (int j=0; j<4; j++) {
+              if (shapes[currentShape][i][j].id != 'v') {
+                  Brain.Screen.setPenColor(myGray);
+                  Brain.Screen.drawRectangle(shapes[currentShape][i][j].x,shapes[currentShape][i][j].y,20,20,black);
+                  Brain.Screen.setPenColor(white);
+              }
+          }
+      }
     }
 
     currentShape += 1;
     if (currentShape == 4) {
         currentShape = 0;
     }
-
-    draw();
+    
+    if (show) {
+        draw();
+    }
 }

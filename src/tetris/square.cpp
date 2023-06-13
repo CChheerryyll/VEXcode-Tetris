@@ -7,11 +7,15 @@ Square::Square() {
 
 }
 
-Square::Square(int x_, int y_, char id_) : x(x_), y(y_), id(id_) {
+Square::Square(int x_, int y_, char id_, bool t) : x(x_), y(y_), belongsToTetro(t), id(id_) {
     if (id == 'I') {
         c = color(102,204,204);
-        //printf("created an I block\n");
     }
+}
+
+void Square::setSquare(char id_) {
+    belongsToTetro = false;
+    id = id_;
 }
 
 void Square::draw() {
@@ -21,7 +25,7 @@ void Square::draw() {
             Brain.Screen.drawRectangle(x,y,20,20,black);
             Brain.Screen.setPenColor(white);
         }
-        else if (id == 'I') {
+        else {
             Brain.Screen.drawRectangle(x,y,20,20,c);
             /*if (c == myCyan) {
             printf("drew an I block\n");

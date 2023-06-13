@@ -13,6 +13,7 @@ class Square {
     
     int x, y;
     color c;
+    bool belongsToTetro;
     
     /**
      * b: background
@@ -32,13 +33,21 @@ class Square {
     /**
      * creates a square with position and id
      * constant size 20 pixels
+     * and whether the square belongs to a 
+     * user-controlled tetromino
      */
-    Square(int x_, int y_, char id_);
+    Square(int x_, int y_, char id_, bool t);
 
     /**
      * draw the square on the screen
      */
     void draw();
+
+    /**
+     * set the square status based on id
+     * this square will not belong to a tetromino
+     */
+    void setSquare(char id_);
 
     void moveRight();
 

@@ -17,7 +17,7 @@ class Tetris {
 
     Matrix gameboard, field;
 
-    Tetromino testBlock;
+    Tetromino block;
 
     double timeElapsed, timeStamp;
 

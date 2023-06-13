@@ -7,20 +7,21 @@ int xP = 120, yP = 120;
 
 Square Ishapes[4][4][4];
 
-Square voidState[4][4] = {  {Square(xP,yP,'v'),   Square(xP+20,yP,'v'),   Square(xP+40,yP,'v'),   Square(xP+60,yP,'v')},
-                         {Square(xP,yP+20,'v'),Square(xP+20,yP+20,'v'),Square(xP+40,yP+20,'v'),Square(xP+60,yP+20,'v')},
-                         {Square(xP,yP+40,'v'),Square(xP+20,yP+40,'v'),Square(xP+40,yP+40,'v'),Square(xP+60,yP+40,'v')},
-                         {Square(xP,yP+60,'v'),Square(xP+20,yP+60,'v'),Square(xP+40,yP+60,'v'),Square(xP+60,yP+60,'v')}  };
 
-Square I0[4][4] = {  {Square(xP,yP,'I'),   Square(xP+20,yP,'I'),   Square(xP+40,yP,'I'),   Square(xP+60,yP,'I')},
-                  {Square(xP,yP+20,'v'),Square(xP+20,yP+20,'v'),Square(xP+40,yP+20,'v'),Square(xP+60,yP+20,'v')},
-                  {Square(xP,yP+40,'v'),Square(xP+20,yP+40,'v'),Square(xP+40,yP+40,'v'),Square(xP+60,yP+40,'v')},
-                  {Square(xP,yP+60,'v'),Square(xP+20,yP+60,'v'),Square(xP+40,yP+60,'v'),Square(xP+60,yP+60,'v')}  };
+Square voidState[4][4] = {  {Square(xP,yP,'v', false),   Square(xP+20,yP,'v', false),   Square(xP+40,yP,'v', false),   Square(xP+60,yP,'v', false)},
+                         {Square(xP,yP+20,'v', false),Square(xP+20,yP+20,'v', false),Square(xP+40,yP+20,'v', false),Square(xP+60,yP+20,'v', false)},
+                         {Square(xP,yP+40,'v', false),Square(xP+20,yP+40,'v', false),Square(xP+40,yP+40,'v', false),Square(xP+60,yP+40,'v', false)},
+                         {Square(xP,yP+60,'v', false),Square(xP+20,yP+60,'v', false),Square(xP+40,yP+60,'v', false),Square(xP+60,yP+60,'v', false)}  };
 
-Square I1[4][4] = {  {Square(xP,yP,'I'),   Square(xP+20,yP,'v'),   Square(xP+40,yP,'v'),   Square(xP+60,yP,'v')},
-                  {Square(xP,yP+20,'I'),Square(xP+20,yP+20,'v'),Square(xP+40,yP+20,'v'),Square(xP+60,yP+20,'v')},
-                  {Square(xP,yP+40,'I'),Square(xP+20,yP+40,'v'),Square(xP+40,yP+40,'v'),Square(xP+60,yP+40,'v')},
-                  {Square(xP,yP+60,'I'),Square(xP+20,yP+60,'v'),Square(xP+40,yP+60,'v'),Square(xP+60,yP+60,'v')}  };
+Square I0[4][4] = {  {Square(xP,yP,'I', false),   Square(xP+20,yP,'I', false),   Square(xP+40,yP,'I', false),   Square(xP+60,yP,'I', false)},
+                  {Square(xP,yP+20,'v', false),Square(xP+20,yP+20,'v', false),Square(xP+40,yP+20,'v', false),Square(xP+60,yP+20,'v', false)},
+                  {Square(xP,yP+40,'v', false),Square(xP+20,yP+40,'v', false),Square(xP+40,yP+40,'v', false),Square(xP+60,yP+40,'v', false)},
+                  {Square(xP,yP+60,'v', true), Square(xP+20,yP+60,'v', true), Square(xP+40,yP+60,'v', true), Square(xP+60,yP+60,'v', true)}  };
+
+Square I1[4][4] = {  {Square(xP,yP,'I', true),   Square(xP+20,yP,'v', false),   Square(xP+40,yP,'v', false),   Square(xP+60,yP,'v', false)},
+                  {Square(xP,yP+20,'I', true),Square(xP+20,yP+20,'v', false),Square(xP+40,yP+20,'v', false),Square(xP+60,yP+20,'v', false)},
+                  {Square(xP,yP+40,'I', true),Square(xP+20,yP+40,'v', false),Square(xP+40,yP+40,'v', false),Square(xP+60,yP+40,'v', false)},
+                  {Square(xP,yP+60,'I', true),Square(xP+20,yP+60,'v', false),Square(xP+40,yP+60,'v', false),Square(xP+60,yP+60,'v', false)}  };
 
 /**
  * helper function

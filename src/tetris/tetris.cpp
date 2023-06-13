@@ -4,7 +4,6 @@
 using namespace vex;
 
 Tetris::Tetris() {
-    MyTimer = timer();
     
     gameboard = Matrix(10,10,20,20);
 
@@ -16,16 +15,62 @@ Tetris::Tetris() {
     drawBackground();
 
     //test
-    testBlock = Tetromino(60,60,'I');
+    //testBlock = Tetromino(60,60,'I', true);
 }
 
 void Tetris::play() {
+    Brain.Screen.printAt(240,35,"press down to start");
+    while(!Controller1.ButtonDown.pressing()) {
+        wait(50,msec);
+    }
+    MyTimer = timer();
+
+    //create a block
+    block = Tetromino(20,20,'I',false);
+    gameboard.updateTetromino(block);
+
+    /*for(int i=0; i<gameboard.rows; i++) {
+        for (int j=0; j<gameboard.rows; j++) {
+            if (gameboard.matrix[i][j].belongsToTetro) {
+                printf("t ");
+            }
+            else {
+                printf("f ");
+            }
+            //printf("%c ",gameboard.matrix[i][j].id);
+        }
+        printf("\n");
+    }*/
+
+    Brain.Screen.setPenColor(black);
+    Brain.Screen.drawRectangle(240,20,240,20,black);
+    Brain.Screen.setPenColor(white);
+    Brain.Screen.printAt(240,35,"timer: ");
+    
+    while(1) {
+
+        if (Controller1.ButtonA.pressing()) {
+            if (!rightPressing) {
+                if (gameboard.validUpdate(block, 'r')) {
+                    block.moveRight();
+                    gameboard.updateTetromino(block);
+                    gameboard.drawBorder();
+                }
+                rightPressing = true;
+            }
+        }
+        else {
+            rightPressing = false;
+        }
+        wait(50,msec);}
+
+    /*
     while(1) {
         updateTime();
         //buttons
         if (Controller1.ButtonA.pressing()) {
             if (!rightPressing) {
-                testBlock.moveRight();
+                block.moveRight();
                 rightPressing = true;
             }
         }
@@ -35,7 +80,7 @@ void Tetris::play() {
 
         if (Controller1.ButtonB.pressing()) {
             if (!downPressing) {
-                testBlock.moveDown();
+                block.moveDown();
                 downPressing = true;
             }
         }
@@ -45,7 +90,7 @@ void Tetris::play() {
 
         if (Controller1.ButtonY.pressing()) {
             if (!leftPressing) {
-                testBlock.moveLeft();
+                block.moveLeft();
                 leftPressing = true;
             }
         }
@@ -56,14 +101,15 @@ void Tetris::play() {
         if (Controller1.ButtonX.pressing()) {
             if (!upPressing) {
                 //testBlock.moveUp();
-                testBlock.rotate();
+                block.rotate();
                 upPressing = true;
             }
         }
         else {
             upPressing = false;
         }
-    }
+    }*/
+
 }
 
 void Tetris::drawBackground() {
@@ -94,6 +140,6 @@ void Tetris::updateTime() {
         timeElapsed = timeStamp + MyTimer.time(sec);
     }
 
-    Brain.Screen.printAt(240,35,"Actual Timer: %f",timeElapsed);
+    Brain.Screen.printAt(240,35,"Timer: %f",timeElapsed);
 
 }
