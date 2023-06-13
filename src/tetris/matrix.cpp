@@ -46,7 +46,6 @@ void Matrix::draw(bool border) {
 }
 
 void Matrix::drawBorder() {
-
     Brain.Screen.drawLine(x,y,uprightx,uprighty);
 
     Brain.Screen.drawLine(uprightx,uprighty,btrightx,btrighty);
@@ -114,7 +113,7 @@ bool Matrix::validUpdate(Tetromino block, char dir) {
 
                     //printf("%d, %d\n", xindex,yindex);
 
-                    if (xindex > rows-1) {
+                    if (xindex > cols-1) {
                         //if pass border
                         //printf("%d > %d-1\n", xindex,rows);
                         valid = false;
@@ -130,13 +129,72 @@ bool Matrix::validUpdate(Tetromino block, char dir) {
             }
             if (!valid) {break;}
         }
-
     }
     else if (dir == 'l') {
-
+        for (int i=0; i<4; i++) {
+            for (int j=0; j<4; j++) {
+                if (block.shapes[block.currentShape][i][j].id != 'v') {
+                    int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x)-1;
+                    if (xindex < 0) {
+                        //if pass border
+                        valid = false;
+                        break;
+                    }
+                }
+            }
+            if (!valid) {break;}
+        }
     }
     else if (dir == 'd') {
+        for (int i=0; i<4; i++) {
+            for (int j=0; j<4; j++) {
+                if (block.shapes[block.currentShape][i][j].id != 'v') {
+                    int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y)+1;
+                    if (yindex > rows-1) {
+                        //if pass border
+                        valid = false;
+                        break;
+                    }
+                }
+            }
+            if (!valid) {break;}
+        }
+    }
+    else if (dir == 'u') {
+        for (int i=0; i<4; i++) {
+            for (int j=0; j<4; j++) {
+                if (block.shapes[block.currentShape][i][j].id != 'v') {
+                    int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y)-1;
+                    if (yindex < 0) {
+                        //if pass border
+                        valid = false;
+                        break;
+                    }
+                }
+            }
+            if (!valid) {break;}
+        }
+    }
+    else if (dir == 'o') {
+        int shapeindex = block.currentShape +1;
+        if (shapeindex == 4) {
+            shapeindex = 0;
+        }
 
+        for (int i=0; i<4; i++) {
+            for (int j=0; j<4; j++) {
+                if (block.shapes[shapeindex][i][j].id != 'v') {
+                    int yindex = convertIndex(block.shapes[shapeindex][i][j].y, y);
+                    int xindex = convertIndex(block.shapes[shapeindex][i][j].x, x);
+                    if (yindex < 0 || yindex > rows-1 || xindex < 0 || xindex > cols-1) {
+                        //if pass border
+                        valid = false;
+                        break;
+                    }
+                }
+            }
+            if (!valid) {break;}
+        }
     }
     else {
         printf("wrong dir\n");

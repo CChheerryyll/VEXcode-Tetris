@@ -48,7 +48,7 @@ void Tetris::play() {
     Brain.Screen.printAt(240,35,"timer: ");
     
     while(1) {
-
+        //buttons
         if (Controller1.ButtonA.pressing()) {
             if (!rightPressing) {
                 if (gameboard.validUpdate(block, 'r')) {
@@ -62,7 +62,79 @@ void Tetris::play() {
         else {
             rightPressing = false;
         }
-        wait(50,msec);}
+
+        if (Controller1.ButtonY.pressing()) {
+            if (!leftPressing) {
+                if (gameboard.validUpdate(block, 'l')) {
+                    block.moveLeft();
+                    gameboard.updateTetromino(block);
+                    gameboard.drawBorder();
+                }
+                leftPressing = true;
+            }
+        }
+        else {
+            leftPressing = false;
+        }
+
+        if (Controller1.ButtonB.pressing()) {
+            if (!downPressing) {
+                if (gameboard.validUpdate(block, 'd')) {
+                    block.moveDown();
+                    gameboard.updateTetromino(block);
+                    gameboard.drawBorder();
+                }
+                downPressing = true;
+            }
+        }
+        else {
+            downPressing = false;
+        }
+
+        if (Controller1.ButtonUp.pressing()) {
+            if (!upPressing) {
+                if (gameboard.validUpdate(block, 'u')) {
+                    block.moveUp();
+                    gameboard.updateTetromino(block);
+                    gameboard.drawBorder();
+                }
+                upPressing = true;
+            }
+        }
+        else {
+            upPressing = false;
+        }
+
+        if (Controller1.ButtonUp.pressing()) {
+            if (!upPressing) {
+                if (gameboard.validUpdate(block, 'u')) {
+                    block.moveUp();
+                    gameboard.updateTetromino(block);
+                    gameboard.drawBorder();
+                }
+                upPressing = true;
+            }
+        }
+        else {
+            upPressing = false;
+        }
+
+        if (Controller1.ButtonX.pressing()) {
+            if (!rotatePressing) {
+                if (gameboard.validUpdate(block, 'o')) {
+                    block.rotate();
+                    gameboard.updateTetromino(block);
+                    gameboard.drawBorder();
+                }
+                rotatePressing = true;
+            }
+        }
+        else {
+            rotatePressing = false;
+        }
+        
+        wait(50,msec);
+    }
 
     /*
     while(1) {

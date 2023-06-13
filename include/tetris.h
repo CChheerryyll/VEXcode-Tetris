@@ -21,7 +21,7 @@ class Tetris {
 
     double timeElapsed, timeStamp;
 
-    bool paused, rightPressing, leftPressing, upPressing, downPressing;
+    bool paused, rightPressing, leftPressing, upPressing, downPressing, rotatePressing;
     
     /**
      * creates a tetris game to play with
