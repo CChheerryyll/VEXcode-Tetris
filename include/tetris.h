@@ -22,6 +22,9 @@ class Tetris {
     double timeElapsed, timeStamp;
 
     bool paused, rightPressing, leftPressing, upPressing, downPressing, rotatePressing;
+
+    //list of tetromino id
+    char idList[7] = {'I', 'O', 'T', 'J', 'L', 'S', 'Z'};
     
     /**
      * creates a tetris game to play with

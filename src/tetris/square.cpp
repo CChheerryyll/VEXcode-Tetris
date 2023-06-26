@@ -11,6 +11,24 @@ Square::Square(int x_, int y_, char id_, bool t) : x(x_), y(y_), belongsToTetro(
     if (id == 'I') {
         c = color(102,204,204);
     }
+    else if (id == 'O') {
+        c = color(255,204,102);
+    }
+    else if (id == 'T') {
+        c = color(255,192,203);
+    }
+    else if (id == 'J') {
+        c = color(51,102,255);
+    }
+    else if (id == 'L') {
+        c = color(255,153,51);
+    }
+    else if (id == 'S') {
+        c = color(102,204,102);
+    }
+    else if (id == 'Z') {
+        c = color(255,77,77);
+    }
 }
 
 void Square::setSquare(char id_) {

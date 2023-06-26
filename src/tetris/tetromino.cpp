@@ -16,6 +16,43 @@ Tetromino::Tetromino(int x_, int y_, char id_, bool show_) {
             transfer(shapes[i],Ishapes[i]);
         }
     }
+    else if (id == 'O') {
+        for (int i=0; i<4; i++) {
+            setPos(Oshapes[i],x,y);
+            transfer(shapes[i],Oshapes[i]);
+        }
+    }
+    else if (id == 'T') {
+        for (int i=0; i<4; i++) {
+            setPos(Tshapes[i],x,y);
+            transfer(shapes[i],Tshapes[i]);
+        }
+    }
+    else if (id == 'J') {
+        for (int i=0; i<4; i++) {
+            setPos(Jshapes[i],x,y);
+            transfer(shapes[i],Jshapes[i]);
+        }
+    }
+    else if (id == 'L') {
+        for (int i=0; i<4; i++) {
+            setPos(Lshapes[i],x,y);
+            transfer(shapes[i],Lshapes[i]);
+        }
+    }
+    else if (id == 'S') {
+        for (int i=0; i<4; i++) {
+            setPos(Sshapes[i],x,y);
+            transfer(shapes[i],Sshapes[i]);
+        }
+    }
+    else if (id == 'Z') {
+        for (int i=0; i<4; i++) {
+            setPos(Zshapes[i],x,y);
+            transfer(shapes[i],Zshapes[i]);
+        }
+    }
+
     if(show) {
         draw();
     }

@@ -144,10 +144,20 @@ bool Matrix::validUpdate(Tetromino block, char dir) {
     if (dir == 'r') {
         int pXIndex = convertIndex(block.shapes[block.currentShape][0][block.boundary[3]].x, x)+1; //predictedXIndex
         
-        for (int i=0; i<4; i++) {
-            if (pXIndex > cols - 1) {
-                valid = false;
-                break;
+        if (block.id == 'I') { //please write better code when you have time
+            for (int i=0; i<4; i++) {
+                if (pXIndex > cols - 1) {
+                    valid = false;
+                    break;
+                }
+            }
+        }
+        else {
+            for (int i=0; i<4; i++) {
+                if (pXIndex >= cols - 1) {
+                    valid = false;
+                    break;
+                }
             }
         }
         

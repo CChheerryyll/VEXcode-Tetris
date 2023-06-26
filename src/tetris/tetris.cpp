@@ -14,8 +14,6 @@ Tetris::Tetris() {
     initializeStates();
     drawBackground();
 
-    //test
-    //testBlock = Tetromino(60,60,'I', true);
 }
 
 void Tetris::play() {
@@ -31,8 +29,8 @@ void Tetris::play() {
     Brain.Screen.printAt(240,35,"timer: ");
 
     //create a block
-    block = Tetromino(20,20,'I',false);
-    gameboard.updateTetromino(block);
+    /*block = Tetromino(20,20,'I',false);
+    gameboard.updateTetromino(block);*/
 
     /*for(int i=0; i<gameboard.rows; i++) {
         for (int j=0; j<gameboard.rows; j++) {
@@ -46,8 +44,16 @@ void Tetris::play() {
         }
         printf("\n");
     }*/
+
+    //set a distinct seed based on time
+    srand(time(NULL));
+
     while (1) { //to make sure the game doesn't exit
-        block = Tetromino(20,20,'I',false);
+
+        //randomize an id
+        int randomNumber = rand() % 7;
+
+        block = Tetromino(60,20,idList[randomNumber],false);
         gameboard.updateTetromino(block);
 
         while(1) {
