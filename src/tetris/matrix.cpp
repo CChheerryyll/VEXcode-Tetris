@@ -150,20 +150,22 @@ bool Matrix::validUpdate(Tetromino block, char dir) {
                 break;
             }
         }
-
-        for (int i=0; i<4; i++) {
-            for (int j=0; j<4; j++) {
-                if (block.shapes[block.currentShape][i][j].id != 'v') {
-                    int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y);
-                    int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x)+1;
-                    if (matrix[xindex][yindex].id != 'v' && matrix[xindex][yindex].id != 'b' && !matrix[xindex][yindex].belongsToTetro) {
-                        //if overlap with existing blocks in the matrix
-                        valid = false;
-                        break;
+        
+        if (valid) {
+            for (int i=0; i<4; i++) {
+                for (int j=0; j<4; j++) {
+                    if (block.shapes[block.currentShape][i][j].id != 'v') {
+                        int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y);
+                        int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x)+1;
+                        if (matrix[xindex][yindex].id != 'v' && matrix[xindex][yindex].id != 'b' && !matrix[xindex][yindex].belongsToTetro) {
+                            //if overlap with existing blocks in the matrix
+                            valid = false;
+                            break;
+                        }
                     }
                 }
+                if (!valid) {break;}
             }
-            if (!valid) {break;}
         }
     }
     else if (dir == 'l') {
@@ -176,19 +178,21 @@ bool Matrix::validUpdate(Tetromino block, char dir) {
             }
         }
 
-        for (int i=0; i<4; i++) {
-            for (int j=0; j<4; j++) {
-                if (block.shapes[block.currentShape][i][j].id != 'v') {
-                    int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y);
-                    int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x)-1;
-                    if (matrix[xindex][yindex].id != 'v' && matrix[xindex][yindex].id != 'b' && !matrix[xindex][yindex].belongsToTetro) {
-                        //if overlap with existing blocks in the matrix
-                        valid = false;
-                        break;
+        if (valid) {
+            for (int i=0; i<4; i++) {
+                for (int j=0; j<4; j++) {
+                    if (block.shapes[block.currentShape][i][j].id != 'v') {
+                        int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y);
+                        int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x)-1;
+                        if (matrix[xindex][yindex].id != 'v' && matrix[xindex][yindex].id != 'b' && !matrix[xindex][yindex].belongsToTetro) {
+                            //if overlap with existing blocks in the matrix
+                            valid = false;
+                            break;
+                        }
                     }
                 }
+                if (!valid) {break;}
             }
-            if (!valid) {break;}
         }
 
     }
@@ -202,19 +206,21 @@ bool Matrix::validUpdate(Tetromino block, char dir) {
             }
         }
 
-        for (int i=0; i<4; i++) {
-            for (int j=0; j<4; j++) {
-                if (block.shapes[block.currentShape][i][j].id != 'v') {
-                    int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y)+1;
-                    int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x);
-                    if (matrix[xindex][yindex].id != 'v' && matrix[xindex][yindex].id != 'b' && !matrix[xindex][yindex].belongsToTetro) {
-                        //if overlap with existing blocks in the matrix
-                        valid = false;
-                        break;
+        if (valid) {
+            for (int i=0; i<4; i++) {
+                for (int j=0; j<4; j++) {
+                    if (block.shapes[block.currentShape][i][j].id != 'v') {
+                        int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y)+1;
+                        int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x);
+                        if (matrix[xindex][yindex].id != 'v' && matrix[xindex][yindex].id != 'b' && !matrix[xindex][yindex].belongsToTetro) {
+                            //if overlap with existing blocks in the matrix
+                            valid = false;
+                            break;
+                        }
                     }
                 }
+                if (!valid) {break;}
             }
-            if (!valid) {break;}
         }
 
     }
@@ -222,25 +228,27 @@ bool Matrix::validUpdate(Tetromino block, char dir) {
         int pYIndex = convertIndex(block.shapes[block.currentShape][block.boundary[1]][0].y, y)-1; //predictedYIndex
         
         for (int i=0; i<4; i++) {
-            if (pYIndex > rows - 1) {
+            if (pYIndex < 0) {
                 valid = false;
                 break;
             }
         }
 
-        for (int i=0; i<4; i++) {
-            for (int j=0; j<4; j++) {
-                if (block.shapes[block.currentShape][i][j].id != 'v') {
-                    int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y)-1;
-                    int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x);
-                    if (matrix[xindex][yindex].id != 'v' && matrix[xindex][yindex].id != 'b' && !matrix[xindex][yindex].belongsToTetro) {
-                        //if overlap with existing blocks in the matrix
-                        valid = false;
-                        break;
+        if (valid) {
+            for (int i=0; i<4; i++) {
+                for (int j=0; j<4; j++) {
+                    if (block.shapes[block.currentShape][i][j].id != 'v') {
+                        int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y)-1;
+                        int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x);
+                        if (matrix[xindex][yindex].id != 'v' && matrix[xindex][yindex].id != 'b' && !matrix[xindex][yindex].belongsToTetro) {
+                            //if overlap with existing blocks in the matrix
+                            valid = false;
+                            break;
+                        }
                     }
                 }
+                if (!valid) {break;}
             }
-            if (!valid) {break;}
         }
 
     }
