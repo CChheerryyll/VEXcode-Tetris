@@ -67,12 +67,32 @@ class Matrix {
      */
     bool ifStopTetro(Tetromino block);
 
+    void clearColumn(int index);
+
+    /**
+     * assume the move is valid
+     */
+    void moveColumnRight(int index);
+
+    bool filledColumn(int index);
+
+    /**
+     * clear any filled columns and score them
+     */
+    void scoreColumns();
+
     /**
      * a helper function
      * take a tetrosquare's positon on the screen
      * and convert it to an index in matrix 
      */
     int convertIndex(int tpos, int mpos);
+
+    /** 
+     * a helper function
+     * print the matrix in terminal
+     */
+    void printMatrix();
 };
 
 #endif

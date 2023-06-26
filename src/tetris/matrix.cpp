@@ -98,43 +98,25 @@ void Matrix::updateTetromino(Tetromino block) {
             }
         }
     }
-    
+    printMatrix();
 }
 
 void Matrix::transferTetromino(Tetromino block) {
-    //clear previous tetromino in the matrix
-    for (int i=0; i<rows; i++) {
-        for (int j=0; j<cols; j++) {
-            if (matrix[i][j].belongsToTetro) {
-                matrix[i][j].setSquare('b');
-                Brain.Screen.setPenColor(myGray);
-                Brain.Screen.drawRectangle(matrix[i][j].x, matrix[i][j].y,20,20,black);
-                Brain.Screen.setPenColor(white);
-                //printf("%d, %d",matrix[i][j].x, matrix[i][j].y);
-            }
-        }
-    }
     //update the new tetromino
     //convert tetromino squares position to position on matrix
     for (int i=0; i<4; i++) {
         for (int j=0; j<4; j++) {
             if (block.shapes[block.currentShape][i][j].id != 'v') {
                 int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x);
-                if (xindex < 0 || xindex > rows-1) { //out of bounds (x)
-                    continue;
-                }
-
                 int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y);
-                if (yindex < 0 || xindex > rows-1) { //out of bounds (y)
-                    continue;
-                }
 
                 matrix[xindex][yindex] = block.shapes[block.currentShape][i][j];
                 matrix[xindex][yindex].belongsToTetro = false;
-                matrix[xindex][yindex].draw();
+                //matrix[xindex][yindex].draw();
             }
         }
     }
+    printMatrix();
     
 }
 
@@ -147,6 +129,14 @@ bool Matrix::validUpdate(Tetromino block, char dir) {
         if (block.id == 'I') { //please write better code when you have time
             for (int i=0; i<4; i++) {
                 if (pXIndex > cols - 1) {
+                    valid = false;
+                    break;
+                }
+            }
+        }
+        else if (block.id == 'L' && (block.currentShape == 1 || block.currentShape == 3)) {
+            for (int i=0; i<4; i++) {
+                if (pXIndex > cols - 3) {
                     valid = false;
                     break;
                 }
@@ -323,6 +313,60 @@ bool Matrix::ifStopTetro(Tetromino block) {
     return s;
 }
 
+void Matrix::clearColumn(int index) {
+    for (int i=0; i<rows; i++) {
+        matrix[i][index].id = 'b';
+        matrix[i][index].belongsToTetro = false;
+        matrix[i][index].draw();
+    }
+}
+
+void Matrix::moveColumnRight(int index) {
+    for (int i=0; i<rows; i++) {
+        matrix[i][index+1].id = matrix[i][index].id;
+        matrix[i][index].id = 'b';
+        matrix[i][index+1].draw();
+        matrix[i][index].draw();
+    }
+}
+
+bool Matrix::filledColumn(int index) {
+    bool f = true;
+    
+    for (int i=0; i<rows; i++) {
+        if (matrix[i][index].id == 'v' || matrix[i][index].id == 'b') {
+            f = false;
+            break;
+        }
+    }
+
+    return f;
+}
+
+void Matrix::scoreColumns() {
+    for (int j=0; j<cols; j++) { //go through every column
+        if (filledColumn(j)) {
+            clearColumn(j);
+            
+            //move every column to its left right a block
+            for (int i=j-1; i>=0; i--) {
+                moveColumnRight(i);
+            }
+        }
+    }
+    drawBorder();
+}
+
 int Matrix::convertIndex(int tpos, int mpos) {
     return (tpos - mpos/*starting position of matrix*/) / 20;
+}
+
+void Matrix::printMatrix() {
+    for (int i=0; i<rows; i++) {
+        for (int j=0; j<cols; j++) {
+            printf("%c ", matrix[j][i].id);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }

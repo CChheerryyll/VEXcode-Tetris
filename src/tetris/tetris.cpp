@@ -28,23 +28,6 @@ void Tetris::play() {
     Brain.Screen.setPenColor(white);
     Brain.Screen.printAt(240,35,"timer: ");
 
-    //create a block
-    /*block = Tetromino(20,20,'I',false);
-    gameboard.updateTetromino(block);*/
-
-    /*for(int i=0; i<gameboard.rows; i++) {
-        for (int j=0; j<gameboard.rows; j++) {
-            if (gameboard.matrix[i][j].belongsToTetro) {
-                printf("t ");
-            }
-            else {
-                printf("f ");
-            }
-            //printf("%c ",gameboard.matrix[i][j].id);
-        }
-        printf("\n");
-    }*/
-
     //set a distinct seed based on time
     srand(time(NULL));
 
@@ -145,6 +128,8 @@ void Tetris::play() {
             //whether to stop the tetro and set up a new one
             if (gameboard.ifStopTetro(block)) {
                 gameboard.transferTetromino(block);
+                //check if any rows can be cleared
+                gameboard.scoreColumns();
                 break;
             }
 
