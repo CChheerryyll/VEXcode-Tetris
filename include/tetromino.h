@@ -15,6 +15,8 @@ class Tetromino {
 
         Square shapes[4][4][4];
         int currentShape;
+        int boundary[4] = {0,0,0,0};
+        //up, down, left, right
 
         Tetromino();
 
@@ -55,6 +57,16 @@ class Tetromino {
          * rotate the tetromino and draw
          */
         void rotate();
+
+        /**
+         * set the boundary of the tetromino in its 4x4 matrix
+         */
+        void setBoundary();
+
+        /**
+         * a test function to print the tetro's status in terminal
+         */
+        void printTetro();
 
 };
 

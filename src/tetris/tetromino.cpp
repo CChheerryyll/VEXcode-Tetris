@@ -19,15 +19,13 @@ Tetromino::Tetromino(int x_, int y_, char id_, bool show_) {
     if(show) {
         draw();
     }
+    
+    //boundary[3] = 0;
+    setBoundary();
+    //printf("%d, %d, %d, %d\n",boundary[0],boundary[1],boundary[2],boundary[3]);
+    //printf("0, 0, 0, 3  correct\n");
+    //0,0,0,3
 }
-
-/*void Tetromino::transfer(Square shape_[4][4], Square sq[4][4]) {
-    for (int i=0; i<4; i++) {
-        for (int j=0; j<4; j++) {
-            shape_[i][j] = sq[i][j];
-        }
-    }
-}*/
 
 void Tetromino::draw() {
     for (int i=0; i<4; i++) {
@@ -122,5 +120,85 @@ void Tetromino::rotate() {
     
     if (show) {
         draw();
+    }
+
+    setBoundary();
+}
+
+void Tetromino::setBoundary() {
+    //upper boundary
+    bool b = false; //break
+    for (int i=0; i<4; i++) {
+        for (int j=0; j<4; j++) {
+            if (shapes[currentShape][i][j].belongsToTetro) {
+                boundary[0] = i;
+                //printf("%d\n",boundary[0]);
+                b = true;
+                break;
+            }
+        }
+        if (b) {
+            break;
+        }
+    }
+    
+    //lower boundary
+    b = false; //break
+    for (int i=0; i<4; i++) {
+        for (int j=0; j<4; j++) {
+            if (shapes[currentShape][3-i][j].belongsToTetro) {
+                boundary[1] = 3-i;
+                b = true;
+                break;
+            }
+        }
+        if (b) {
+            break;
+        }
+    }
+
+    //left boundary
+    b = false; //break
+    for (int j=0; j<4; j++) {
+        for (int i=0; i<4; i++) {
+            if (shapes[currentShape][i][j].belongsToTetro) {
+                boundary[2] = j;
+                b = true;
+                break;
+            }
+        }
+        if (b) {
+            break;
+        }
+    }
+
+    //right boundary
+    b = false; //break
+    for (int j=0; j<4; j--) {
+        for (int i=0; i<4; i++) {
+            if (shapes[currentShape][i][3-j].belongsToTetro) {
+                boundary[3] = 3-j;
+                //printf("%d\n",boundary[3]);
+                b = true;
+                break;
+            }
+        }
+        if (b) {
+            break;
+        }
+    }
+}
+
+void Tetromino::printTetro() {
+    for (int i=0; i<4; i++) {
+        for (int j=0; j<4; j++) {
+            if (shapes[currentShape][i][j].belongsToTetro) {
+                printf("t ");
+            }
+            else {
+                printf("f ");
+            }
+        }
+        printf("\n");
     }
 }

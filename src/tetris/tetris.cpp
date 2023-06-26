@@ -25,6 +25,11 @@ void Tetris::play() {
     }
     MyTimer = timer();
 
+    Brain.Screen.setPenColor(black);
+    Brain.Screen.drawRectangle(240,20,240,20,black);
+    Brain.Screen.setPenColor(white);
+    Brain.Screen.printAt(240,35,"timer: ");
+
     //create a block
     block = Tetromino(20,20,'I',false);
     gameboard.updateTetromino(block);
@@ -41,146 +46,107 @@ void Tetris::play() {
         }
         printf("\n");
     }*/
+    while (1) { //to make sure the game doesn't exit
+        block = Tetromino(20,20,'I',false);
+        gameboard.updateTetromino(block);
 
-    Brain.Screen.setPenColor(black);
-    Brain.Screen.drawRectangle(240,20,240,20,black);
-    Brain.Screen.setPenColor(white);
-    Brain.Screen.printAt(240,35,"timer: ");
-    
-    while(1) {
-        //buttons
-        if (Controller1.ButtonA.pressing()) {
-            if (!rightPressing) {
-                if (gameboard.validUpdate(block, 'r')) {
-                    block.moveRight();
-                    gameboard.updateTetromino(block);
-                    gameboard.drawBorder();
+        while(1) {
+            //buttons
+            if (Controller1.ButtonA.pressing()) {
+                if (!rightPressing) {
+                    if (gameboard.validUpdate(block, 'r')) {
+                        block.moveRight();
+                        gameboard.updateTetromino(block);
+                        gameboard.drawBorder();
+                    }
+                    rightPressing = true;
                 }
-                rightPressing = true;
             }
-        }
-        else {
-            rightPressing = false;
+            else {
+                rightPressing = false;
+            }
+
+            if (Controller1.ButtonY.pressing()) {
+                if (!leftPressing) {
+                    if (gameboard.validUpdate(block, 'l')) {
+                        block.moveLeft();
+                        gameboard.updateTetromino(block);
+                        gameboard.drawBorder();
+                    }
+                    leftPressing = true;
+                }
+            }
+            else {
+                leftPressing = false;
+            }
+
+            if (Controller1.ButtonB.pressing()) {
+                if (!downPressing) {
+                    if (gameboard.validUpdate(block, 'd')) {
+                        block.moveDown();
+                        gameboard.updateTetromino(block);
+                        gameboard.drawBorder();
+                    }
+                    downPressing = true;
+                }
+            }
+            else {
+                downPressing = false;
+            }
+
+            if (Controller1.ButtonUp.pressing()) {
+                if (!upPressing) {
+                    if (gameboard.validUpdate(block, 'u')) {
+                        block.moveUp();
+                        gameboard.updateTetromino(block);
+                        gameboard.drawBorder();
+                    }
+                    upPressing = true;
+                }
+            }
+            else {
+                upPressing = false;
+            }
+
+            if (Controller1.ButtonUp.pressing()) {
+                if (!upPressing) {
+                    if (gameboard.validUpdate(block, 'u')) {
+                        block.moveUp();
+                        gameboard.updateTetromino(block);
+                        gameboard.drawBorder();
+                    }
+                    upPressing = true;
+                }
+            }
+            else {
+                upPressing = false;
+            }
+
+            if (Controller1.ButtonX.pressing()) {
+                if (!rotatePressing) {
+                    if (gameboard.validUpdate(block, 'o')) {
+                        block.rotate();
+                        gameboard.updateTetromino(block);
+                        gameboard.drawBorder();
+                    }
+                    rotatePressing = true;
+                }
+            }
+            else {
+                rotatePressing = false;
+            }
+            
+            //whether to stop the tetro and set up a new one
+            if (gameboard.ifStopTetro(block)) {
+                gameboard.transferTetromino(block);
+                break;
+            }
+
+            wait(50,msec);
         }
 
-        if (Controller1.ButtonY.pressing()) {
-            if (!leftPressing) {
-                if (gameboard.validUpdate(block, 'l')) {
-                    block.moveLeft();
-                    gameboard.updateTetromino(block);
-                    gameboard.drawBorder();
-                }
-                leftPressing = true;
-            }
-        }
-        else {
-            leftPressing = false;
-        }
-
-        if (Controller1.ButtonB.pressing()) {
-            if (!downPressing) {
-                if (gameboard.validUpdate(block, 'd')) {
-                    block.moveDown();
-                    gameboard.updateTetromino(block);
-                    gameboard.drawBorder();
-                }
-                downPressing = true;
-            }
-        }
-        else {
-            downPressing = false;
-        }
-
-        if (Controller1.ButtonUp.pressing()) {
-            if (!upPressing) {
-                if (gameboard.validUpdate(block, 'u')) {
-                    block.moveUp();
-                    gameboard.updateTetromino(block);
-                    gameboard.drawBorder();
-                }
-                upPressing = true;
-            }
-        }
-        else {
-            upPressing = false;
-        }
-
-        if (Controller1.ButtonUp.pressing()) {
-            if (!upPressing) {
-                if (gameboard.validUpdate(block, 'u')) {
-                    block.moveUp();
-                    gameboard.updateTetromino(block);
-                    gameboard.drawBorder();
-                }
-                upPressing = true;
-            }
-        }
-        else {
-            upPressing = false;
-        }
-
-        if (Controller1.ButtonX.pressing()) {
-            if (!rotatePressing) {
-                if (gameboard.validUpdate(block, 'o')) {
-                    block.rotate();
-                    gameboard.updateTetromino(block);
-                    gameboard.drawBorder();
-                }
-                rotatePressing = true;
-            }
-        }
-        else {
-            rotatePressing = false;
-        }
-        
-        wait(50,msec);
+        wait(50, msec);
     }
-
-    /*
-    while(1) {
-        updateTime();
-        //buttons
-        if (Controller1.ButtonA.pressing()) {
-            if (!rightPressing) {
-                block.moveRight();
-                rightPressing = true;
-            }
-        }
-        else {
-            rightPressing = false;
-        }
-
-        if (Controller1.ButtonB.pressing()) {
-            if (!downPressing) {
-                block.moveDown();
-                downPressing = true;
-            }
-        }
-        else {
-            downPressing = false;
-        }
-
-        if (Controller1.ButtonY.pressing()) {
-            if (!leftPressing) {
-                block.moveLeft();
-                leftPressing = true;
-            }
-        }
-        else {
-            leftPressing = false;
-        }
-
-        if (Controller1.ButtonX.pressing()) {
-            if (!upPressing) {
-                //testBlock.moveUp();
-                block.rotate();
-                upPressing = true;
-            }
-        }
-        else {
-            upPressing = false;
-        }
-    }*/
 
 }
 

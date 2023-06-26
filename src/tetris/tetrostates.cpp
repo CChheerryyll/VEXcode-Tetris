@@ -13,10 +13,10 @@ Square voidState[4][4] = {  {Square(xP,yP,'v', false),   Square(xP+20,yP,'v', fa
                          {Square(xP,yP+40,'v', false),Square(xP+20,yP+40,'v', false),Square(xP+40,yP+40,'v', false),Square(xP+60,yP+40,'v', false)},
                          {Square(xP,yP+60,'v', false),Square(xP+20,yP+60,'v', false),Square(xP+40,yP+60,'v', false),Square(xP+60,yP+60,'v', false)}  };
 
-Square I0[4][4] = {  {Square(xP,yP,'I', false),   Square(xP+20,yP,'I', false),   Square(xP+40,yP,'I', false),   Square(xP+60,yP,'I', false)},
+Square I0[4][4] = {  {Square(xP,yP,'I', true),   Square(xP+20,yP,'I', true),   Square(xP+40,yP,'I', true),   Square(xP+60,yP,'I', true)},
                   {Square(xP,yP+20,'v', false),Square(xP+20,yP+20,'v', false),Square(xP+40,yP+20,'v', false),Square(xP+60,yP+20,'v', false)},
                   {Square(xP,yP+40,'v', false),Square(xP+20,yP+40,'v', false),Square(xP+40,yP+40,'v', false),Square(xP+60,yP+40,'v', false)},
-                  {Square(xP,yP+60,'v', true), Square(xP+20,yP+60,'v', true), Square(xP+40,yP+60,'v', true), Square(xP+60,yP+60,'v', true)}  };
+                  {Square(xP,yP+60,'v', false), Square(xP+20,yP+60,'v', false), Square(xP+40,yP+60,'v', false), Square(xP+60,yP+60,'v', false)}  };
 
 Square I1[4][4] = {  {Square(xP,yP,'I', true),   Square(xP+20,yP,'v', false),   Square(xP+40,yP,'v', false),   Square(xP+60,yP,'v', false)},
                   {Square(xP,yP+20,'I', true),Square(xP+20,yP+20,'v', false),Square(xP+40,yP+20,'v', false),Square(xP+60,yP+20,'v', false)},

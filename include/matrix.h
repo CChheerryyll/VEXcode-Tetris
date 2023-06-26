@@ -51,10 +51,21 @@ class Matrix {
     void updateTetromino(Tetromino block);
 
     /**
+     * store the tetromino's position on the matrix
+     * without labeling the blocks as "belongsToTetro"
+     */
+    void transferTetromino(Tetromino block);
+
+    /**
      * determine whether the tetromino can move in this 
      * direction
      */
     bool validUpdate(Tetromino block, char dir);
+
+    /**
+     * determine if the tetromino reaches the bottom
+     */
+    bool ifStopTetro(Tetromino block);
 
     /**
      * a helper function
