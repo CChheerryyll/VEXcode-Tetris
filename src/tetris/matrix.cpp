@@ -98,7 +98,7 @@ void Matrix::updateTetromino(Tetromino block) {
             }
         }
     }
-    printMatrix();
+    //printMatrix();
 }
 
 void Matrix::transferTetromino(Tetromino block) {
@@ -116,7 +116,7 @@ void Matrix::transferTetromino(Tetromino block) {
             }
         }
     }
-    printMatrix();
+    //printMatrix();
     
 }
 
@@ -355,6 +355,28 @@ void Matrix::scoreColumns() {
         }
     }
     drawBorder();
+}
+
+bool Matrix::canFitTetro(Tetromino block, int xStartingPos) {
+    bool c = true;
+    for (int i=0; i<4; i++) {
+        for (int j=0; j<4; j++) {
+            if (block.shapes[block.currentShape][i][j].belongsToTetro) {
+                int xindex = convertIndex(block.shapes[block.currentShape][i][j].x, x);
+                int yindex = convertIndex(block.shapes[block.currentShape][i][j].y, y);
+
+                //printMatrix();
+                if (matrix[yindex][xindex].id != 'b' && matrix[yindex][xindex].id != 'v') {
+                    c = false;
+                    //printf("here\n");
+                    break;
+                }
+            }
+            if (!c) {break;}
+        }
+    }
+
+    return c;
 }
 
 int Matrix::convertIndex(int tpos, int mpos) {

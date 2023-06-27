@@ -7,7 +7,7 @@ Tetris::Tetris() {
     
     gameboard = Matrix(10,10,20,20);
 
-    paused = false, rightPressing = false;
+    paused = false, gameOver = false;
     timeStamp = 0.0;
     timeElapsed = 0.0;
 
@@ -26,114 +26,143 @@ void Tetris::play() {
     Brain.Screen.setPenColor(black);
     Brain.Screen.drawRectangle(240,20,240,20,black);
     Brain.Screen.setPenColor(white);
-    Brain.Screen.printAt(240,35,"timer: ");
+    //Brain.Screen.printAt(240,35,"timer: ");
 
     //set a distinct seed based on time
     srand(time(NULL));
-
-    while (1) { //to make sure the game doesn't exit
-
+    
+    while (1) { //a full tetro cycle
+        
         //randomize an id
         int randomNumber = rand() % 7;
+        int tetroStartingXPos = 20;
+        block = Tetromino(tetroStartingXPos,20,idList[randomNumber],false);
+        //gameboard.updateTetromino(block);
 
-        block = Tetromino(60,20,idList[randomNumber],false);
-        gameboard.updateTetromino(block);
-
-        while(1) {
-            //buttons
-            if (Controller1.ButtonA.pressing()) {
-                if (!rightPressing) {
-                    if (gameboard.validUpdate(block, 'r')) {
-                        block.moveRight();
-                        gameboard.updateTetromino(block);
-                        gameboard.drawBorder();
-                    }
-                    rightPressing = true;
-                }
-            }
-            else {
-                rightPressing = false;
-            }
-
-            if (Controller1.ButtonY.pressing()) {
-                if (!leftPressing) {
-                    if (gameboard.validUpdate(block, 'l')) {
-                        block.moveLeft();
-                        gameboard.updateTetromino(block);
-                        gameboard.drawBorder();
-                    }
-                    leftPressing = true;
-                }
-            }
-            else {
-                leftPressing = false;
-            }
-
-            if (Controller1.ButtonB.pressing()) {
-                if (!downPressing) {
-                    if (gameboard.validUpdate(block, 'd')) {
-                        block.moveDown();
-                        gameboard.updateTetromino(block);
-                        gameboard.drawBorder();
-                    }
-                    downPressing = true;
-                }
-            }
-            else {
-                downPressing = false;
-            }
-
-            if (Controller1.ButtonUp.pressing()) {
-                if (!upPressing) {
-                    if (gameboard.validUpdate(block, 'u')) {
-                        block.moveUp();
-                        gameboard.updateTetromino(block);
-                        gameboard.drawBorder();
-                    }
-                    upPressing = true;
-                }
-            }
-            else {
-                upPressing = false;
-            }
-
-            if (Controller1.ButtonUp.pressing()) {
-                if (!upPressing) {
-                    if (gameboard.validUpdate(block, 'u')) {
-                        block.moveUp();
-                        gameboard.updateTetromino(block);
-                        gameboard.drawBorder();
-                    }
-                    upPressing = true;
-                }
-            }
-            else {
-                upPressing = false;
-            }
-
-            if (Controller1.ButtonX.pressing()) {
-                if (!rotatePressing) {
-                    if (gameboard.validUpdate(block, 'o')) {
-                        block.rotate();
-                        gameboard.updateTetromino(block);
-                        gameboard.drawBorder();
-                    }
-                    rotatePressing = true;
-                }
-            }
-            else {
-                rotatePressing = false;
-            }
+        if (gameboard.canFitTetro(block,tetroStartingXPos)) { //check whether there's enough space to fit a new tetro  
+            gameboard.updateTetromino(block);
             
-            //whether to stop the tetro and set up a new one
-            if (gameboard.ifStopTetro(block)) {
-                gameboard.transferTetromino(block);
-                //check if any rows can be cleared
-                gameboard.scoreColumns();
-                break;
+        }
+        else {
+            gameOver = true;
+            //break;
+        }
+        /*else { //move the starting position to the right
+            
+            //if successfully creates tetro
+            if (gameboard.canFitTetro(block,tetroStartingXPos)) {
+                gameboard.updateTetromino(block);
+            }
+            else {
+              //game over
+              break;
             }
 
-            wait(50,msec);
+        }*/
+
+        if (!gameOver) {
+            while(1) {
+                //buttons
+                if (Controller1.ButtonA.pressing()) {
+                    if (!rightPressing) {
+                        if (gameboard.validUpdate(block, 'r')) {
+                            block.moveRight();
+                            gameboard.updateTetromino(block);
+                            gameboard.drawBorder();
+                        }
+                        rightPressing = true;
+                    }
+                }
+                else {
+                    rightPressing = false;
+                }
+
+                if (Controller1.ButtonY.pressing()) {
+                    if (!leftPressing) {
+                        if (gameboard.validUpdate(block, 'l')) {
+                            block.moveLeft();
+                            gameboard.updateTetromino(block);
+                            gameboard.drawBorder();
+                        }
+                        leftPressing = true;
+                    }
+                }
+                else {
+                    leftPressing = false;
+                }
+
+                if (Controller1.ButtonB.pressing()) {
+                    if (!downPressing) {
+                        if (gameboard.validUpdate(block, 'd')) {
+                            block.moveDown();
+                            gameboard.updateTetromino(block);
+                            gameboard.drawBorder();
+                        }
+                        downPressing = true;
+                    }
+                }
+                else {
+                    downPressing = false;
+                }
+
+                if (Controller1.ButtonUp.pressing()) {
+                    if (!upPressing) {
+                        if (gameboard.validUpdate(block, 'u')) {
+                            block.moveUp();
+                            gameboard.updateTetromino(block);
+                            gameboard.drawBorder();
+                        }
+                        upPressing = true;
+                    }
+                }
+                else {
+                    upPressing = false;
+                }
+
+                if (Controller1.ButtonUp.pressing()) {
+                    if (!upPressing) {
+                        if (gameboard.validUpdate(block, 'u')) {
+                            block.moveUp();
+                            gameboard.updateTetromino(block);
+                            gameboard.drawBorder();
+                        }
+                        upPressing = true;
+                    }
+                }
+                else {
+                    upPressing = false;
+                }
+
+                if (Controller1.ButtonX.pressing()) {
+                    if (!rotatePressing) {
+                        if (gameboard.validUpdate(block, 'o')) {
+                            block.rotate();
+                            gameboard.updateTetromino(block);
+                            gameboard.drawBorder();
+                        }
+                        rotatePressing = true;
+                    }
+                }
+                else {
+                    rotatePressing = false;
+                }
+                
+                //whether to stop the tetro and set up a new one
+                if (gameboard.ifStopTetro(block)) {
+                    gameboard.transferTetromino(block);
+                    //check if any rows can be cleared
+                    gameboard.scoreColumns();
+                    break;
+                }
+
+                wait(50,msec);
+            }
+        }
+        else {
+            Brain.Screen.printAt(240,35,"Game Over");
+            while (1) { // make sure the game doesn't exit
+                wait(50,msec);
+            }
         }
 
         wait(50, msec);

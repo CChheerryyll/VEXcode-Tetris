@@ -82,6 +82,12 @@ class Matrix {
     void scoreColumns();
 
     /**
+     * a function to determine whether a tetro can 
+     * be successfully created
+     */
+    bool canFitTetro(Tetromino block, int xStartingPos);
+
+    /**
      * a helper function
      * take a tetrosquare's positon on the screen
      * and convert it to an index in matrix 
