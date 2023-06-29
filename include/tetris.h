@@ -3,7 +3,6 @@
 
 #include "matrix.h"
 #include "tetromino.h"
-//#include "colors.h"
 
 using namespace vex;
 
@@ -21,7 +20,7 @@ class Tetris {
 
     double timeElapsed, timeStamp;
 
-    bool paused, gameOver, rightPressing, leftPressing, upPressing, downPressing, rotatePressing;
+    bool paused, gameOver, rightPressing, leftPressing, upPressing, downPressing, rotatePressing, dropPressing;
 
     //list of tetromino id
     char idList[7] = {'I', 'O', 'T', 'J', 'L', 'S', 'Z'};

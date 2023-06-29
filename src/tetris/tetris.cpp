@@ -17,8 +17,8 @@ Tetris::Tetris() {
 }
 
 void Tetris::play() {
-    Brain.Screen.printAt(240,35,"press down to start");
-    while(!Controller1.ButtonDown.pressing()) {
+    Brain.Screen.printAt(250,35,"press Y to start");
+    while(!Controller1.ButtonY.pressing()) {
         wait(50,msec);
     }
     MyTimer = timer();
@@ -146,12 +146,29 @@ void Tetris::play() {
                 else {
                     rotatePressing = false;
                 }
+
+                if (Controller1.ButtonDown.pressing()) {
+                    if (!dropPressing) {
+                        while (gameboard.validUpdate(block, 'd')) {
+                            block.moveDown();
+                        }
+                        gameboard.updateTetromino(block);
+                        //gameboard.draw(true);
+                        //gameboard.drawBorder();
+                        //gameboard.printMatrix();
+                        dropPressing = true;
+                    }
+                }
+                else {
+                    dropPressing = false;
+                }
                 
                 //whether to stop the tetro and set up a new one
                 if (gameboard.ifStopTetro(block)) {
                     gameboard.transferTetromino(block);
                     //check if any rows can be cleared
                     gameboard.scoreColumns();
+                    gameboard.draw(true);
                     break;
                 }
 
@@ -159,7 +176,7 @@ void Tetris::play() {
             }
         }
         else {
-            Brain.Screen.printAt(240,35,"Game Over");
+            Brain.Screen.printAt(250,35,"Game Over");
             while (1) { // make sure the game doesn't exit
                 wait(50,msec);
             }

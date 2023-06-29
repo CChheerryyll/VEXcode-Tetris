@@ -8,6 +8,71 @@ Square::Square() {
 }
 
 Square::Square(int x_, int y_, char id_, bool t) : x(x_), y(y_), belongsToTetro(t), id(id_) {
+    
+}
+
+void Square::setSquare(char id_) {
+    belongsToTetro = false;
+    id = id_;
+}
+
+void Square::draw() {
+    if (id != 'v') {
+        if (id == 'b') {
+            Brain.Screen.setPenColor(myGray);
+            Brain.Screen.drawRectangle(x,y,20,20,black);
+            Brain.Screen.setPenColor(white);
+            //printf("drew a blank square at %d, %d\n", x, y);
+        }
+        else {
+            Brain.Screen.drawRectangle(x,y,20,20,getColor());
+            //printf("\ndrew a %c square at %d, %d\n", id, x, y);
+        }
+    }
+}
+
+void Square::moveRight() {
+    if (id != 'v') {
+        Brain.Screen.setPenColor(myGray);
+        Brain.Screen.drawRectangle(x,y,20,20,black);
+        Brain.Screen.setPenColor(white);
+        x+=20;
+        Brain.Screen.drawRectangle(x,y,20,20,getColor());
+    }
+}
+
+void Square::moveLeft() {
+    if (id != 'v') {
+        Brain.Screen.setPenColor(myGray);
+        Brain.Screen.drawRectangle(x,y,20,20,black);
+        Brain.Screen.setPenColor(white);
+        x-=20;
+        Brain.Screen.drawRectangle(x,y,20,20,getColor());
+    }
+}
+
+void Square::moveUp() {
+    if (id != 'v') {
+        Brain.Screen.setPenColor(myGray);
+        Brain.Screen.drawRectangle(x,y,20,20,black);
+        Brain.Screen.setPenColor(white);
+        y-=20;
+        Brain.Screen.drawRectangle(x,y,20,20,getColor());
+    }
+}
+
+void Square::moveDown() {
+    if (id != 'v') {
+        Brain.Screen.setPenColor(myGray);
+        Brain.Screen.drawRectangle(x,y,20,20,black);
+        Brain.Screen.setPenColor(white);
+        y+=20;
+        Brain.Screen.drawRectangle(x,y,20,20,getColor());
+    }
+}
+
+color Square::getColor() {
+    color c;
     if (id == 'I') {
         c = color(102,204,204);
     }
@@ -29,65 +94,6 @@ Square::Square(int x_, int y_, char id_, bool t) : x(x_), y(y_), belongsToTetro(
     else if (id == 'Z') {
         c = color(255,77,77);
     }
-}
+    return c;
 
-void Square::setSquare(char id_) {
-    belongsToTetro = false;
-    id = id_;
-}
-
-void Square::draw() {
-    if (id != 'v') {
-        if (id == 'b') {
-            Brain.Screen.setPenColor(myGray);
-            Brain.Screen.drawRectangle(x,y,20,20,black);
-            Brain.Screen.setPenColor(white);
-        }
-        else {
-            Brain.Screen.drawRectangle(x,y,20,20,c);
-            /*if (c == myCyan) {
-            printf("drew an I block\n");
-            }*/
-        }
-    }
-}
-
-void Square::moveRight() {
-    if (id != 'v') {
-        Brain.Screen.setPenColor(myGray);
-        Brain.Screen.drawRectangle(x,y,20,20,black);
-        Brain.Screen.setPenColor(white);
-        x+=20;
-        Brain.Screen.drawRectangle(x,y,20,20,c);
-    }
-}
-
-void Square::moveLeft() {
-    if (id != 'v') {
-        Brain.Screen.setPenColor(myGray);
-        Brain.Screen.drawRectangle(x,y,20,20,black);
-        Brain.Screen.setPenColor(white);
-        x-=20;
-        Brain.Screen.drawRectangle(x,y,20,20,c);
-    }
-}
-
-void Square::moveUp() {
-    if (id != 'v') {
-        Brain.Screen.setPenColor(myGray);
-        Brain.Screen.drawRectangle(x,y,20,20,black);
-        Brain.Screen.setPenColor(white);
-        y-=20;
-        Brain.Screen.drawRectangle(x,y,20,20,c);
-    }
-}
-
-void Square::moveDown() {
-    if (id != 'v') {
-        Brain.Screen.setPenColor(myGray);
-        Brain.Screen.drawRectangle(x,y,20,20,black);
-        Brain.Screen.setPenColor(white);
-        y+=20;
-        Brain.Screen.drawRectangle(x,y,20,20,c);
-    }
 }

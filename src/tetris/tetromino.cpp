@@ -57,23 +57,14 @@ Tetromino::Tetromino(int x_, int y_, char id_, bool show_) {
         draw();
     }
     
-    //boundary[3] = 0;
     setBoundary();
-    //printf("%d, %d, %d, %d\n",boundary[0],boundary[1],boundary[2],boundary[3]);
-    //printf("0, 0, 0, 3  correct\n");
-    //0,0,0,3
 }
 
 void Tetromino::draw() {
     for (int i=0; i<4; i++) {
         for (int j=0; j<4; j++) {
             shapes[currentShape][i][j].draw();
-            /*if (shapes[currentShape][i][j].c == myCyan) {
-            printf("%c ", shapes[currentShape][i][j].id);
-            }
-            else {printf("e ");}*/
         }
-        //printf("\n");
     }
 }
 
@@ -169,7 +160,6 @@ void Tetromino::setBoundary() {
         for (int j=0; j<4; j++) {
             if (shapes[currentShape][i][j].belongsToTetro) {
                 boundary[0] = i;
-                //printf("%d\n",boundary[0]);
                 b = true;
                 break;
             }
@@ -211,11 +201,10 @@ void Tetromino::setBoundary() {
 
     //right boundary
     b = false; //break
-    for (int j=0; j<4; j--) {
+    for (int j=0; j<4; j++) {
         for (int i=0; i<4; i++) {
             if (shapes[currentShape][i][3-j].belongsToTetro) {
                 boundary[3] = 3-j;
-                //printf("%d\n",boundary[3]);
                 b = true;
                 break;
             }

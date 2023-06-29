@@ -12,7 +12,6 @@ class Square {
     public:
     
     int x, y;
-    color c;
     bool belongsToTetro;
     
     /**
@@ -56,6 +55,8 @@ class Square {
     void moveUp();
 
     void moveDown();
+
+    color getColor();
 };
 
 #endif

@@ -35,7 +35,7 @@ Matrix::~Matrix() {
 void Matrix::draw(bool border) {
     for (int i=0; i<rows; i++) {
         for (int j=0; j<cols; j++) {
-            matrix[i][j].draw();
+            matrix[j][i].draw();
         }
     }
 
@@ -116,7 +116,6 @@ void Matrix::transferTetromino(Tetromino block) {
             }
         }
     }
-    //printMatrix();
     
 }
 
@@ -125,29 +124,11 @@ bool Matrix::validUpdate(Tetromino block, char dir) {
     
     if (dir == 'r') {
         int pXIndex = convertIndex(block.shapes[block.currentShape][0][block.boundary[3]].x, x)+1; //predictedXIndex
-        
-        if (block.id == 'I') { //please write better code when you have time
-            for (int i=0; i<4; i++) {
-                if (pXIndex > cols - 1) {
-                    valid = false;
-                    break;
-                }
-            }
-        }
-        else if (block.id == 'L' && (block.currentShape == 1 || block.currentShape == 3)) {
-            for (int i=0; i<4; i++) {
-                if (pXIndex > cols - 3) {
-                    valid = false;
-                    break;
-                }
-            }
-        }
-        else {
-            for (int i=0; i<4; i++) {
-                if (pXIndex >= cols - 1) {
-                    valid = false;
-                    break;
-                }
+
+        for (int i=0; i<4; i++) {
+            if (pXIndex > cols - 1) {
+                valid = false;
+                break;
             }
         }
         
@@ -344,8 +325,10 @@ bool Matrix::filledColumn(int index) {
 }
 
 void Matrix::scoreColumns() {
+    //bool s = false; //if any columns are scored
     for (int j=0; j<cols; j++) { //go through every column
         if (filledColumn(j)) {
+            //s = true;
             clearColumn(j);
             
             //move every column to its left right a block
@@ -354,6 +337,10 @@ void Matrix::scoreColumns() {
             }
         }
     }
+    /*if (s) {
+        draw(true);
+    }*/
+    //printMatrix();
     drawBorder();
 }
 
