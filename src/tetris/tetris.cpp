@@ -18,6 +18,9 @@ Tetris::Tetris() {
 
 void Tetris::play() {
     Brain.Screen.printAt(250,35,"press Y to start");
+    Brain.Screen.printAt(250,170,"Work in progress -");
+    Brain.Screen.printAt(250,195, "does not represent");
+    Brain.Screen.printAt(250,220, "final quality");
     while(!Controller1.ButtonY.pressing()) {
         wait(50,msec);
     }
