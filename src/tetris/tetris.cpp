@@ -10,6 +10,7 @@ Tetris::Tetris() {
     paused = false, gameOver = false;
     timeStamp = 0.0;
     timeElapsed = 0.0;
+    score = 0;
 
     initializeStates();
     drawBackground();
@@ -29,7 +30,7 @@ void Tetris::play() {
     Brain.Screen.setPenColor(black);
     Brain.Screen.drawRectangle(240,20,240,20,black);
     Brain.Screen.setPenColor(white);
-    //Brain.Screen.printAt(240,35,"timer: ");
+    Brain.Screen.printAt(240,35,"score: %d ", score);
 
     //set a distinct seed based on time
     srand(time(NULL));
@@ -169,8 +170,10 @@ void Tetris::play() {
                 //whether to stop the tetro and set up a new one
                 if (gameboard.ifStopTetro(block)) {
                     gameboard.transferTetromino(block);
+                    score+=5;
                     //check if any rows can be cleared
-                    gameboard.scoreColumns();
+                    score+= 50*gameboard.scoreColumns();
+                    Brain.Screen.printAt(240,35,"score: %d ", score);
                     gameboard.draw(true);
                     break;
                 }
@@ -179,7 +182,7 @@ void Tetris::play() {
             }
         }
         else {
-            Brain.Screen.printAt(250,35,"Game Over");
+            Brain.Screen.printAt(240,60,"Game Over");
             while (1) { // make sure the game doesn't exit
                 wait(50,msec);
             }

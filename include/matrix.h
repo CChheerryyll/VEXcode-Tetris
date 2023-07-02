@@ -78,8 +78,9 @@ class Matrix {
 
     /**
      * clear any filled columns and score them
+     * return the number of columns scored
      */
-    void scoreColumns();
+    int scoreColumns();
 
     /**
      * a function to determine whether a tetro can 

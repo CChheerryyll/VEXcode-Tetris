@@ -324,13 +324,14 @@ bool Matrix::filledColumn(int index) {
     return f;
 }
 
-void Matrix::scoreColumns() {
-    //bool s = false; //if any columns are scored
+int Matrix::scoreColumns() {
+    int s = 0;
+
     for (int j=0; j<cols; j++) { //go through every column
         if (filledColumn(j)) {
             //s = true;
             clearColumn(j);
-            
+            s+= 1;
             //move every column to its left right a block
             for (int i=j-1; i>=0; i--) {
                 moveColumnRight(i);
@@ -342,6 +343,7 @@ void Matrix::scoreColumns() {
     }*/
     //printMatrix();
     drawBorder();
+    return s;
 }
 
 bool Matrix::canFitTetro(Tetromino block, int xStartingPos) {

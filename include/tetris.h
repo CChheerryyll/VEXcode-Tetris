@@ -20,6 +20,8 @@ class Tetris {
 
     double timeElapsed, timeStamp;
 
+    int score;
+
     bool paused, gameOver, rightPressing, leftPressing, upPressing, downPressing, rotatePressing, dropPressing;
 
     //list of tetromino id
