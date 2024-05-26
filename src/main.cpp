@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       Nanayu                                                    */
+/*    Author:       Cheryl                                                    */
 /*    Created:      Mon Jun 05 2023                                           */
 /*    Description:  V5 project                                                */
 /*                                                                            */
